@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :trips
   has_many :tickets, dependent: :destroy
+  has_many :tickets, -> { where('users.pilot' => true) }, through: :trips
+
   after_destroy :cleanup
 
   devise :database_authenticatable, :registerable,
