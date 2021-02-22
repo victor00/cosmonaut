@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_214205) do
+ActiveRecord::Schema.define(version: 2021_02_22_215754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "class_option"
+    t.text "review"
+    t.integer "rating", default: 0
+    t.bigint "user_id", null: false
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["trip_id"], name: "index_tickets_on_trip_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "origin", null: false
+    t.string "destination", null: false
+    t.date "launch_date", null: false
+    t.float "price", null: false
+    t.integer "max_tripulation", null: false
+    t.string "spaceship_name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_trips_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -21,10 +46,17 @@ ActiveRecord::Schema.define(version: 2021_02_22_214205) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "origin_planet", null: false
+    t.boolean "pilot", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tickets", "trips"
+  add_foreign_key "tickets", "users"
+  add_foreign_key "trips", "users"
 end
