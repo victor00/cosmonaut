@@ -1,4 +1,9 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: %i[show]
+  def index
+    @trips = Trip.all
+  end
+
   def new
     @trip = Trip.new
   end
@@ -7,14 +12,14 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.user = current_user
     if @trip.save
-      redirect_to new_trip_path(@trip)
+      redirect_to trip_path(@trip)
     else
       render :new
     end
   end
 
   def show
-    find
+    @ticket = Ticket.new
   end
 
   private
@@ -24,7 +29,7 @@ class TripsController < ApplicationController
                                  :launch_date, :price, :spaceship_name, :max_tripulation)
   end
 
-  def find
+  def set_trip
     @trip = Trip.find(params[:id])
   end
 end
