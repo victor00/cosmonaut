@@ -1,34 +1,14 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :trips
+  has_many :trips, dependent: :destroy
   has_many :tickets, dependent: :destroy
-  has_many :tickets, -> { where('users.pilot' => true) }, through: :trips
-
-  after_destroy :cleanup
+  # has_many :tickets, -> { where('users.pilot' => true) }, through: :trips
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :password, :email, :first_name, :last_name, :origin_planet,
+  validates :first_name, :last_name, :origin_planet,
             presence: true
 
-  validates :email, uniqueness: true
-
-  validates :password, confirmation: true,
-                       unless: proc { |a| a.password.blank? }
-
-  private
-
-  def cleanup
-    if pilot
-      trips.destroy_all
-    else
-      trips.destroy
-    end
-  end
-
-  def pilot?
-    pilot
-  end
 end

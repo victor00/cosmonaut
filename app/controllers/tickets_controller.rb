@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   
   def index
-    @tickets = Ticket.all
+    @tickets = current_user.tickets.all
   end
 
   def show
