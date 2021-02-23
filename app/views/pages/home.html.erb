@@ -1,7 +1,8 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if user_signed_in? && !current_user.pilot %>
+  <h2>Welcome! <%= current_user.first_name %></h2>
+<% end %>
 
-<% if user_signed_in? %>
-  <h2>Você está logado :D</h2>
-  <p>Seu email é <%= current_user.email %></p>
+<% if user_signed_in? && current_user.pilot %>
+  <h2>Welcome! <%= current_user.first_name %></h2>
+  <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-gradient'  %>
 <% end %>

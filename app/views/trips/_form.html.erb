@@ -1,0 +1,10 @@
+<%= simple_form_for trip do |f| %>
+    <%= f.input :origin, label: 'Origin Planet: ', collection: Trip.pluck(:origin) %><br>
+    <%= f.input :destination, label: 'Destination Planet: ', collection: Trip.pluck(:destination) %><br>
+    <%= f.input :launch_date, label: 'Launch Date: '%><br>
+    <%= f.input :price, label: 'Price *Millions: ', collection: (1..20) %><br>
+    <%= f.input :spaceship_name, label: 'Spaceship Name: '%><br>
+    <%= f.input :max_tripulation, label: 'Max Tripulation: ', collection: (1..10) %><br>
+    <%= f.submit class: 'btn btn-gradient mt-2' %>
+    <%= link_to "Back to Home",  root_path, class: 'btn btn-gradient mt-2'  %>
+  <% end %>
