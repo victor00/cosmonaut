@@ -1,2 +1,36 @@
 // Import page-specific CSS files here.
 @import "home";
+
+h1 {
+    padding-top: 10rem;
+    font-size: 150px;
+    color: whitesmoke;
+}
+
+h2 {
+    color: #fff;
+}
+
+i {
+    color: #fff;
+    font-size: 12.5rem;
+}
+
+.glow {
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 6s ease-in-out infinite alternate;
+    -moz-animation: glow 6s ease-in-out infinite alternate;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #16c7df, 0 0 40px #16c7df;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #16c7df, 0 0 30px #16c7df, 0 0 50px #16c7df;
+  }
+}

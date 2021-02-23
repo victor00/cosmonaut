@@ -1,21 +1,30 @@
-
-<% if user_signed_in? && !current_user.pilot %>
-  <h2>Welcome! <%= current_user.first_name %></h2>
-  <%= simple_form_for :search, url: root_path, method: "GET" do |f| %>
-    <%= f.input :origin, collection: Trip.pluck(:origin) %>
-    <%= f.input :destination, collection: Trip.pluck(:destination) %>
-    <%= f.input :launch_date, collection: Trip.pluck(:launch_date) %>
-    <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
+  <div class="star-small"></div>
+  <div class="star-mid"></div>
+  <div class="star-large"></div>
+        
+  <% if user_signed_in? && !current_user.pilot %>
+    <h2>Welcome! <%= current_user.first_name %></h2>
+    <%= simple_form_for :search, url: root_path, method: "GET" do |f| %>
+      <%= f.input :origin, collection: Trip.pluck(:origin) %>
+      <%= f.input :destination, collection: Trip.pluck(:destination) %>
+      <%= f.input :launch_date, collection: Trip.pluck(:launch_date) %>
+      <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
+    <% end %>
+    <%= @trips.each do |trip|%>
+      <%= trip.origin %>
+      <%= trip.destination %>
+      <%= trip.launch_date %>
+    <% end %>
   <% end %>
-  <%= @trips.each do |trip|%>
-    <%= trip.origin %>
-    <%= trip.destination %>
-    <%= trip.launch_date %>
+
+  <% if user_signed_in? && current_user.pilot %>
+    <h2>Welcome! <%= current_user.first_name %></h2>
+    <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-gradient'  %>
   <% end %>
-<% end %>
 
-<% if user_signed_in? && current_user.pilot %>
-  <h2>Welcome! <%= current_user.first_name %></h2>
-  <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-gradient'  %>
-<% end %>
-
+  <% unless user_signed_in? %>
+    <div class="container d-flex flex-column align-items-center justify-center glow">
+      <h1>Welcome to Cosmonaut <i class="fas fa-space-shuttle header-icon"></i></h1><br>
+      <h2>your best friend to travel the universe</h2>
+    </div>
+  <% end %>
