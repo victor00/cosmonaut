@@ -7,6 +7,7 @@ class CreateTrips < ActiveRecord::Migration[6.0]
       t.float :price, null: false
       t.integer :max_tripulation, null: false
       t.string :spaceship_name, null: false
+      t.integer :pilot, null: false
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

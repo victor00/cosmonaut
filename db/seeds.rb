@@ -43,7 +43,7 @@ user_last_names = [
     "Snyde", "Snape", "Dent", "Perfect", "Beeblebrox", "Slartibartfast"
 ]
 
-class_option = %w[A B C]
+class_options = %w[A B C]
 
 some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables yougurt]
 
@@ -89,10 +89,48 @@ puts "Creating Users\n"
 end
 
 puts "Setting up Date"
-puts Time.now.strftime("%d-%m-%Y")
+current_date = Time.now
 # date_now = Date.now.parse('%d-%m-%Y')
 
-# puts "Creating Trips"
-# 15.times do 
-#     puts date_now
-# end
+
+
+puts "Creating Trips\n"
+10.times do 
+    origin_planet_start = planets.sample
+    destination_planet_diff = planets.sample
+    destination_planet_diff = planets.sample until origin_planet_start != destination_planet_diff
+
+    trip = Trip.create(
+        origin: origin_planet_start,
+        destination: destination_planet_diff,
+        launch_date: current_date.strftime("%d-%m-%Y"),
+        user: User.all.sample,
+        pilot: User.all.sample.id,
+        price: rand(1..20) * 1_000_000,
+        max_tripulation: rand(1..10),
+        spaceship_name: spaceship_names.sample,
+        
+    )
+
+    current_date += 1.day
+    current_date += 10.year
+    puts "\n#{trip.id} - Trip Created - Ready to launch at: #{trip.launch_date}\n"
+    puts "_" * 55
+end
+
+puts "Creating Tickets\n"
+15.times do
+    # trip_result = Trip.all.sample
+    # max = Trip.where(id: trip_result.id).count(:user_id)
+
+    # unless trip_result.max_tripulation == max
+        ticket = Ticket.create(
+            user: User.all.sample,
+            trip: Trip.all.sample,
+            class_option: class_options.sample,
+            rating: rand(1..5)
+        )
+  
+    puts "\n#{ticket.id} - Ticket Created \n"
+    puts "_" * 55
+end
