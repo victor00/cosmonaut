@@ -124,6 +124,7 @@ puts "Creating Tickets\n"
     # trip_result = Trip.all.sample
     # max = Trip.where(id: trip_result.id).count(:user_id)
 
+    
     # unless trip_result.max_tripulation == max
         ticket = Ticket.create(
             user: User.all.sample,
