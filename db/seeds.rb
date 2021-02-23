@@ -92,7 +92,10 @@ puts "Setting up Date"
 current_date = Time.now
 # date_now = Date.now.parse('%d-%m-%Y')
 
-
+def is_pilot(user_sample)
+    is_pilot(User.all.sample) unless user_sample.pilot
+    user_sample if user_sample.pilot
+end
 
 puts "Creating Trips\n"
 10.times do 
@@ -100,18 +103,16 @@ puts "Creating Trips\n"
     destination_planet_diff = planets.sample
     destination_planet_diff = planets.sample until origin_planet_start != destination_planet_diff
 
-    trip = Trip.create(
-        origin: origin_planet_start,
-        destination: destination_planet_diff,
-        launch_date: current_date.strftime("%d-%m-%Y"),
-        user: User.all.sample,
-        pilot: User.all.sample.id,
-        price: rand(1..20) * 1_000_000,
-        max_tripulation: rand(1..10),
-        spaceship_name: spaceship_names.sample,
+    trip = Trip.new
+    trip.origin = origin_planet_start
+    trip.destination = destination_planet_diff
+    trip.launch_date = current_date.strftime("%d-%m-%Y")
+    trip.user = is_pilot(User.all.sample)
+    trip.price = rand(1..20) * 1_000_000
+    trip.max_tripulation = rand(1..10)
+    trip.spaceship_name = spaceship_names.sample
+    trip.save
         
-    )
-
     current_date += 1.day
     current_date += 10.year
     puts "\n#{trip.id} - Trip Created - Ready to launch at: #{trip.launch_date}\n"
@@ -119,7 +120,7 @@ puts "Creating Trips\n"
 end
 
 puts "Creating Tickets\n"
-15.times do
+30.times do
     # trip_result = Trip.all.sample
     # max = Trip.where(id: trip_result.id).count(:user_id)
 
