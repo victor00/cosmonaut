@@ -48,12 +48,15 @@ class_option = %w[A B C]
 some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables yougurt]
 
 user_emails = []
-email_endings = %w[@gmail.com @outlook.com @yahoo.com @hotmail.com @lewagon.com @zoho.com.br @mail.com]
+email_endings = %w[
+                    @gmail.com @gmail.com.br @outlook.com @outlook.com.br @yahoo.com @yahoo.com.br 
+                    @hotmail.com @lewagon.com @lewagon.com.br @zoho.com @zoho.com.br @mail.com @mail.com.br
+                  ]
 
 
 # Setting emails trying to generate maximum uniques emails
 puts "Setting user emails"
-30.times do 
+50.times do 
     user_emails << "#{Faker::Ancient.god}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
     user_emails << "#{Faker::Ancient.primordial}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
     user_emails << "#{Faker::Ancient.titan}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
@@ -63,25 +66,32 @@ puts "Setting user emails"
     user_emails << "#{Faker::CryptoCoin.coin_name}_#{Faker::Ancient.hero}#{email_endings.sample}".gsub(" ", "")
 end
 
+user_emails.map!(&:downcase)
 user_emails.uniq!
-
 
 # User.pluck(:email) == User.all.map(&:email)
 puts "Creating Users"
 15.times do
     user_email = user_emails.sample
-    user_email = user_emails.sample if User.pluck(:email).include?(user_email)
-    user_planet = planets.sample
-    user_planet = planets.sample if User.pluck(:origin_planet).include?(planets.sample)
-    
+    user_email = user_emails.sample until (User.pluck(:email).exclude?(user_email))
+  
     user = User.create(
         email: user_email,
         password: some_easy_passwords.sample,
         first_name: user_first_names.sample,
         last_name: user_last_names.sample,
-        origin_planet: user_planet,
+        origin_planet: planets.sample,
         pilot: [true, false].sample
     )
-
-    puts "#{user.id} - User Created - #{user.email}" 
+    
+    puts "#{user.id} - User Created - #{user.email}"
+    puts "-" * 55
 end
+
+# puts "Setting up Date"
+# date_now = Date.now.parse('%d-%m-%Y')
+
+# puts "Creating Trips"
+# 15.times do 
+#     puts date_now
+# end
