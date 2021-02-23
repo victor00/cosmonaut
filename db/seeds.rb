@@ -43,13 +43,96 @@ user_last_names = [
     "Snyde", "Snape", "Dent", "Perfect", "Beeblebrox", "Slartibartfast"
 ]
 
-user_emails = []
+class_options = %w[A B C]
 
-15.times do 
-    user_emails << "#{Faker::Ancient.god}@gmail.com"
-    user_emails << "#{Faker::Ancient.primordial}@outlook.com"
-    user_emails << "#{Faker::Ancient.titan}@yahoo.com"
-    user_emails << "#{Faker::Ancient.hero}@hotmail.com"
+some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables yougurt]
+
+user_emails = []
+email_endings = %w[
+                    @gmail.com @gmail.com.br @outlook.com @outlook.com.br @yahoo.com @yahoo.com.br 
+                    @hotmail.com @lewagon.com @lewagon.com.br @zoho.com @zoho.com.br @mail.com @mail.com.br
+                  ]
+
+
+# Setting emails trying to generate maximum uniques emails
+puts "Setting user emails"
+50.times do 
+    user_emails << "#{Faker::Ancient.god}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.primordial}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.titan}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.hero}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Artist.name}_#{Faker::Superhero.prefix}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Space.constellation}_#{Faker::Ancient.hero}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::CryptoCoin.coin_name}_#{Faker::Ancient.hero}#{email_endings.sample}".gsub(" ", "")
 end
 
+user_emails.map!(&:downcase)
 user_emails.uniq!
+
+# User.pluck(:email) == User.all.map(&:email)
+puts "Creating Users\n"
+15.times do
+    user_email = user_emails.sample
+    user_email = user_emails.sample until (User.pluck(:email).exclude?(user_email))
+  
+    user = User.create(
+        email: user_email,
+        password: some_easy_passwords.sample,
+        first_name: user_first_names.sample,
+        last_name: user_last_names.sample,
+        origin_planet: planets.sample,
+        pilot: [true, false].sample
+    )
+
+    puts "\n#{user.id} - User Created - #{user.email}\n"
+    puts "_" * 55
+end
+
+puts "Setting up Date"
+current_date = Time.now
+# date_now = Date.now.parse('%d-%m-%Y')
+
+def is_pilot(user_sample)
+    is_pilot(User.all.sample) unless user_sample.pilot
+    user_sample if user_sample.pilot
+end
+
+puts "Creating Trips\n"
+20.times do 
+    origin_planet_start = planets.sample
+    destination_planet_diff = planets.sample
+    destination_planet_diff = planets.sample until origin_planet_start != destination_planet_diff
+
+    trip = Trip.new
+    trip.origin = origin_planet_start
+    trip.destination = destination_planet_diff
+    trip.launch_date = current_date.strftime("%d-%m-%Y")
+    trip.user = is_pilot(User.all.sample)
+    trip.price = rand(1..20) * 1_000_000
+    trip.max_tripulation = rand(1..10)
+    trip.spaceship_name = spaceship_names.sample
+    trip.save
+    
+    current_date += 1.day
+    current_date += 10.year
+    puts "\n#{trip.id} - Trip Created - Ready to launch at: #{trip.launch_date}\n"
+    puts "_" * 55
+end
+
+puts "Creating Tickets\n"
+30.times do
+    # trip_result = Trip.all.sample
+    # max = Trip.where(id: trip_result.id).count(:user_id)
+
+
+    # unless trip_result.max_tripulation == max
+        ticket = Ticket.create(
+            user: User.all.sample,
+            trip: Trip.all.sample,
+            class_option: class_options.sample,
+            rating: rand(1..5)
+        )
+  
+    puts "\n#{ticket.id} - Ticket Created \n"
+    puts "_" * 55
+end

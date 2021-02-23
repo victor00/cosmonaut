@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password, :email, :first_name, :last_name, :origin_planet,
             presence: true
 
-  validates :origin_planet, :email, uniqueness: true
+  validates :email, uniqueness: true
 
   validates :password, confirmation: true,
                        unless: proc { |a| a.password.blank? }
