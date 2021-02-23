@@ -50,6 +50,7 @@ some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables 
 user_emails = []
 email_endings = %w[@gmail.com @outlook.com @yahoo.com @hotmail.com @lewagon.com @zoho.com.br @mail.com]
 
+
 # Setting emails trying to generate maximum uniques emails
 puts "Setting user emails"
 30.times do 
@@ -79,7 +80,7 @@ puts "Creating Users"
         first_name: user_first_names.sample,
         last_name: user_last_names.sample,
         origin_planet: user_planet,
-        pilot: rand(1..10) == rand(1..20)
+        pilot: [true, false].sample
     )
 
     puts "#{user.id} - User Created - #{user.email}" 
