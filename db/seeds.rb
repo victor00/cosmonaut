@@ -70,7 +70,7 @@ user_emails.map!(&:downcase)
 user_emails.uniq!
 
 # User.pluck(:email) == User.all.map(&:email)
-puts "Creating Users"
+puts "Creating Users\n"
 15.times do
     user_email = user_emails.sample
     user_email = user_emails.sample until (User.pluck(:email).exclude?(user_email))
@@ -83,12 +83,13 @@ puts "Creating Users"
         origin_planet: planets.sample,
         pilot: [true, false].sample
     )
-    
-    puts "#{user.id} - User Created - #{user.email}"
-    puts "-" * 55
+
+    puts "\n#{user.id} - User Created - #{user.email}\n"
+    puts "_" * 55
 end
 
-# puts "Setting up Date"
+puts "Setting up Date"
+puts Time.now.strftime("%d-%m-%Y")
 # date_now = Date.now.parse('%d-%m-%Y')
 
 # puts "Creating Trips"
