@@ -1,6 +1,6 @@
-<h1> Select your trip </h1>
+<h1> These are the scheduled trips </h1>
 <ul>
-  <%= @tickets.each do |ticket| %>
+  <% @tickets.each do |ticket| %>
     <li>
       <!-- <%= ticket.trip.id %> -->
       <%= "Origin: #{ticket.trip.origin}" %>

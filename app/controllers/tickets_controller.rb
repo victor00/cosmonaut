@@ -1,16 +1,9 @@
 class TicketsController < ApplicationController
-<<<<<<< HEAD
   
   def index
     @tickets = Ticket.all
   end
-  
-  def def new
-    @ticket = Ticket.new
-  end
 
-=======
->>>>>>> master
   def show
     @ticket = Ticket.find(params[:id])
   end
