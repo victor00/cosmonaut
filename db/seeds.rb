@@ -98,7 +98,7 @@ def is_pilot(user_sample)
 end
 
 puts "Creating Trips\n"
-10.times do 
+20.times do 
     origin_planet_start = planets.sample
     destination_planet_diff = planets.sample
     destination_planet_diff = planets.sample until origin_planet_start != destination_planet_diff
@@ -112,7 +112,7 @@ puts "Creating Trips\n"
     trip.max_tripulation = rand(1..10)
     trip.spaceship_name = spaceship_names.sample
     trip.save
-        
+    
     current_date += 1.day
     current_date += 10.year
     puts "\n#{trip.id} - Trip Created - Ready to launch at: #{trip.launch_date}\n"
@@ -124,7 +124,7 @@ puts "Creating Tickets\n"
     # trip_result = Trip.all.sample
     # max = Trip.where(id: trip_result.id).count(:user_id)
 
-    
+
     # unless trip_result.max_tripulation == max
         ticket = Ticket.create(
             user: User.all.sample,
