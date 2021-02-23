@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.string :origin_planet, null: false, unique: true
+      t.string :origin_planet, null: false
       t.boolean :pilot, default: false
 
       t.timestamps null: false

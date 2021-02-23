@@ -43,13 +43,44 @@ user_last_names = [
     "Snyde", "Snape", "Dent", "Perfect", "Beeblebrox", "Slartibartfast"
 ]
 
-user_emails = []
+class_option = %w[A B C]
 
-15.times do 
-    user_emails << "#{Faker::Ancient.god}@gmail.com"
-    user_emails << "#{Faker::Ancient.primordial}@outlook.com"
-    user_emails << "#{Faker::Ancient.titan}@yahoo.com"
-    user_emails << "#{Faker::Ancient.hero}@hotmail.com"
+some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables yougurt]
+
+user_emails = []
+email_endings = %w[@gmail.com @outlook.com @yahoo.com @hotmail.com @lewagon.com @zoho.com.br @mail.com]
+
+# Setting emails trying to generate maximum uniques emails
+puts "Setting user emails"
+30.times do 
+    user_emails << "#{Faker::Ancient.god}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.primordial}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.titan}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Ancient.hero}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Artist.name}_#{Faker::Superhero.prefix}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::Space.constellation}_#{Faker::Ancient.hero}#{email_endings.sample}".gsub(" ", "")
+    user_emails << "#{Faker::CryptoCoin.coin_name}_#{Faker::Ancient.hero}#{email_endings.sample}".gsub(" ", "")
 end
 
 user_emails.uniq!
+
+
+# User.pluck(:email) == User.all.map(&:email)
+puts "Creating Users"
+15.times do
+    user_email = user_emails.sample
+    user_email = user_emails.sample if User.pluck(:email).include?(user_email)
+    user_planet = planets.sample
+    user_planet = planets.sample if User.pluck(:origin_planet).include?(planets.sample)
+    
+    user = User.create(
+        email: user_email,
+        password: some_easy_passwords.sample,
+        first_name: user_first_names.sample,
+        last_name: user_last_names.sample,
+        origin_planet: user_planet,
+        pilot: rand(1..10) == rand(1..20)
+    )
+
+    puts "#{user.id} - User Created - #{user.email}" 
+end
