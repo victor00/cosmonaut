@@ -14,8 +14,6 @@
     -webkit-animation: rotating 10s linear infinite;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
-
 html{
   scroll-behavior: smooth;
 }
@@ -30,152 +28,6 @@ body{
     padding: 0;
     font-family: 'Lato', sans-serif;
 }
-
-.App {
-  text-align: center;
-/*   border-bottom: 1px solid gray ; */
-}
-.App.home .App-header {
-  min-height: 100vh;
-}
-.App.about .App-header {
-  background: linear-gradient(to right, #fc4a1a, #f7b733);
-}
-.App.experience .App-header {
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-}
-.App.work .App-header {
-  background: linear-gradient(to right, #00b4db, #0083b0);
-}
-.App.contact .App-header {
-  background: linear-gradient(to right, #eb5757, #000000);
-}
-.App.passion .App-header {
-  background: linear-gradient(to right, #56ab2f, #a8e063);
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  /* background-color: #282c34; */
-  background: radial-gradient(ellipse at bottom,#1b2735 0,#090a0f 100%);
-  min-height: 130vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.routernav-container{
-  height: 80px;
-  background-color: transparent;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-  transition: all .3s ease;
-}
-.routernav-container.stickit{
-  height: 70px;
-  background-color: #a4161a;
-  box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.3);
-}
-
-.routernav-inner{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
-
-.container-logo{
-  display: flex;
-  align-items: center;
-}
-.container-logo a{
-  flex-shrink: 0;
-  width: 100px;
-  text-decoration: none;
-  color: #fff;
-  text-transform: uppercase;
-}
-.container-logo a img{
-  display: block;
-  /* animation: App-logo-spin infinite 20s linear; */
-  max-width: 60px;
-  margin: 0 auto;
-  transition: all .3s ease;
-}
-.container-logo a img:hover{
-  transform: rotateZ(45deg);
-}
-.container-logo .logo-text{
-  margin: 0;
-}
-.container-logo .logo-text:hover ~ .container-logo a{
-  display: none;
-}
-
-.routernav{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.routernav-item{
-  margin-right: 20px;
-}
-.routernav-item a.active, .routernav-item a:hover{
-  box-shadow: inset 0 -2px 0 0 #fff;
-}
-.routernav-item a{
-  display: block;
-  padding: 5px;
-  text-decoration: none;
-  color: #fff;
-  text-transform: uppercase;
-  transition: all .2s ease;
-}
-
-
-
-
-
-
-
-
-
-
 
 /* The Space Effect Begins here boys & girls */
 
@@ -199,6 +51,7 @@ body{
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
 }
 .star-small {
     animation: spaceEffect 50s linear infinite;

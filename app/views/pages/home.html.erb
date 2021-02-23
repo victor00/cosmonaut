@@ -1,7 +1,4 @@
-  <div class="star-small"></div>
-  <div class="star-mid"></div>
-  <div class="star-large"></div>
-        
+      
   <% if user_signed_in? && !current_user.pilot %>
     <h2>Welcome! <%= current_user.first_name %></h2>
     <%= simple_form_for :search, url: root_path, method: "GET" do |f| %>
