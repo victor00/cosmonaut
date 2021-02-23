@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :trips, only: %i[index new create show] do
     resources :tickets, only: %i[create]
   end
-  resources :tickets, only: %i[show]
+  resources :tickets, only: %i[show index]
 end

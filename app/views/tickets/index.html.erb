@@ -1,0 +1,15 @@
+<h1> These are the scheduled trips </h1>
+<ul>
+  <% @tickets.each do |ticket| %>
+    <li>
+      <!-- <%= ticket.trip.id %> -->
+      <%= "Origin: #{ticket.trip.origin}" %>
+      <%= "Destination: #{ticket.trip.destination}" %>
+      <%= "Launch date: #{ticket.trip.launch_date}" %>
+      <%= "Price US$:#{(ticket.trip.price).to_i}" %>
+      <%= "Spaceship name: #{ticket.trip.spaceship_name}" %>
+      <%= "Maximum tripulation:#{ticket.trip.max_tripulation}" %>
+    </li>
+  <% end %>
+</ul>
+
