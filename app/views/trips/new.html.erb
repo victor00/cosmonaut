@@ -1,4 +1,6 @@
-<h1>Trips#new</h1>
-<p>Find me in app/views/trips/new.html.erb</p>
-
-<%= render 'form', trip: @trip %>
+<div class="container d-flex flex-column align-items-center justify-center">
+    <h2 class="trip-title">Create your own Trip</h2>
+    <div class="container w-50">
+        <%= render 'form', trip: @trip %>
+    </div>
+</div>

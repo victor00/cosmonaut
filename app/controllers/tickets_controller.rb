@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-  
   def index
     @tickets = current_user.tickets.all
   end

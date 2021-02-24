@@ -1,15 +1,24 @@
 
 
-<h1> Your Trip: </h1>
-<p>Origin: <%= @trip.origin %></p>
-<p>Destination: <%= @trip.destination %></p>
-<p>Trip Price: <%= "#{@trip.price} Millions" %></p>
-<p>Spaceship Name: <%= @trip.spaceship_name %></p>
-<p>Max Tripulation: <%= @trip.max_tripulation %></p>
-<p>How many slots available: <%= @trip.max_tripulation %></p>
 
-<%= simple_form_for [@trip, @ticket] do |f| %>
-    <%= f.error :user %>
-    <%= f.input :class_option, collection: Ticket::CLASS_OPTIONS %>
-    <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success" %>
-<% end %>
+<div class="container d-flex flex-column align-items-center justify-center">
+    <div  div class="card-product card-product-resize">
+        <%= image_tag "card-background-option-2" %>
+        <div class="card-product-infos p-5">
+            <p>Origin: <%= @trip.origin %></p>
+            <p>Destination: <%= @trip.destination %></p>
+            <p>Trip Price: <%= "#{@trip.price} Millions" %></p>
+            <p>Spaceship Name: <%= @trip.spaceship_name %></p>
+            <p>Max Tripulation: <%= @trip.max_tripulation %></p>
+            <p>How many slots available: <%= @trip.max_tripulation %></p>
+        </div>
+    </div>
+
+    <div class="container mt-5 pt-5 w-50">
+        <%= simple_form_for [@trip, @ticket] do |f| %>
+            <%= f.error :user %>
+            <%= f.input :class_option, collection: Ticket::CLASS_OPTIONS %>
+            <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success" %>
+        <% end %>
+    </div>
+</div>

@@ -1,10 +1,12 @@
 <%= simple_form_for trip do |f| %>
-    <%= f.input :origin, label: 'Origin Planet: ', collection: Trip.pluck(:origin) %><br>
-    <%= f.input :destination, label: 'Destination Planet: ', collection: Trip.pluck(:destination) %><br>
-    <%= f.input :launch_date, label: 'Launch Date: '%><br>
-    <%= f.input :price, label: 'Price *Millions: ', collection: (1..20) %><br>
-    <%= f.input :spaceship_name, label: 'Spaceship Name: '%><br>
-    <%= f.input :max_tripulation, label: 'Max Tripulation: ', collection: (1..10) %><br>
-    <%= f.submit class: 'btn btn-gradient mt-2' %>
-    <%= link_to "Back to Home",  root_path, class: 'btn btn-gradient mt-2'  %>
+    <%= f.input :origin, label: 'Origin Planet: ', collection: Trip.pluck(:origin).uniq, include_blank: "-- Select Origin --"%><br>
+    <%= f.input :destination, label: 'Destination Planet: ', collection: Trip.pluck(:destination).uniq, include_blank: "-- Select Destination --" %><br>
+    <%= f.input :launch_date, label: 'Launch Date: ', as: :date, html5: true %><br>
+    <%= f.input :price, label: 'Price *Millions: ', collection: (1..20), include_blank: "-- Select Price In Millions --" %><br>
+    <%= f.input :spaceship_name, label: 'Spaceship Name: ', placeholder: "Tell us your Spaceship's name" %><br>
+    <%= f.input :max_tripulation, label: 'Max Tripulation: ', collection: (1..10), include_blank: "-- Select how many seats your Spaceship has --" %><br>
+    <div class="d-flex justify-content-between">
+      <%= f.submit class: 'btn btn-success mt-2 mb-5 mr-5 w-50' %>
+      <%= link_to "Back to Home",  root_path, class: 'btn btn-primary mt-2 mb-5'  %>
+    </div>
   <% end %>
