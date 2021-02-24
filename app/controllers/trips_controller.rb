@@ -21,6 +21,7 @@ class TripsController < ApplicationController
 
   def show
     @ticket = Ticket.new
+    @trips = current_user.trips.all
   end
 
   private
@@ -36,8 +37,9 @@ class TripsController < ApplicationController
 
   def spaceship_images
     [
-      "starwars-spaceship-option-1", "starwars-spaceship-option-2", "starwars-spaceship-option-3",
-      "starwars-spaceship-option-4"
+      "spaceship1", "spaceship2", "spaceship3",
+      "spaceship4", "spaceship5", "spaceship6",
+      "spaceship7"
     ]
   end
 end
