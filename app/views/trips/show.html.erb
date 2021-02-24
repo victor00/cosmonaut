@@ -10,6 +10,7 @@
                     <% if @trip.tickets.empty? %>   
                         <p>No Passengers Yet</p>
                     <% else %>
+                            <p><strong>Travel Date:</strong> <%= @trip.launch_date.strftime("%d-%m-%Y") %></p>
                             <p><strong>Passengers: </strong></p>
                             <ul>
                                 <% @trip.tickets.each do |ticket| %>

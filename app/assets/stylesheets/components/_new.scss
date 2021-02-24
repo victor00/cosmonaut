@@ -17,6 +17,12 @@
 }
 
 .card-product-resize {
-  height: 300px !important;
-  width: 600px !important;
+  height: 550px !important;
+  width: 850px !important;
+}
+
+.card-product-resize img {
+  height: 100%;
+  width: 500px !important;
+  object-fit: cover;
 }
