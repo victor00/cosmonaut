@@ -6,6 +6,14 @@
              <div  div class="card-product card-product-resize">
                 <%= image_tag "card-background-option-2" %>
                 <div class="card-product-infos p-5">
+
+                    <p>Origin: <%= @trip.origin %></p>
+                    <p>Destination: <%= @trip.destination %></p>
+                    <p>Trip Price: <%= "#{@trip.price} Millions" %></p>
+                    <p>Spaceship Name: <%= @trip.spaceship_name %></p>
+                    <p>Max Tripulation: <%= @trip.max_tripulation %></p>
+                    <p>Available Seats: <%= @trip.max_tripulation %></p>   
+               
                     <% if @trip.tickets.empty? %>
                         <p>No Passengers Yet</p>
                     <% else %>
@@ -15,6 +23,7 @@
                             <% end %>
                         </ul> 
                     <% end %>
+               
                 </div>  
         </div>
     <% end %>
@@ -29,7 +38,7 @@
                 <p>Trip Price: <%= "#{@trip.price} Millions" %></p>
                 <p>Spaceship Name: <%= @trip.spaceship_name %></p>
                 <p>Max Tripulation: <%= @trip.max_tripulation %></p>
-                <p>How many slots available: <%= @trip.max_tripulation %></p>   
+                <p>Available Seats: <%= @trip.max_tripulation %></p>
             </div>
         </div>
 
