@@ -1,18 +1,39 @@
-
-<div class="container d-flex flex-column align-items-center justify-center">
-<h2>Look At Your Trips, Drive Safely</h2>
-    <% @trips.each do |trip| %>
-        <div  div class="card-product card-product-resize">
-            <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
-            <div class="card-product-infos p-5">
-                <p>Origin: <%= trip.origin %></p>
-                <p>Destination: <%= trip.destination %></p>
-                <p>Trip Price: <%= "#{trip.price} Millions" %></p>
-                <p>Spaceship Name: <%= trip.spaceship_name %></p>
-                <p>Max Tripulation: <%= trip.max_tripulation %></p>
-                <p>How many slots available: <%= trip.max_tripulation %></p>
-                <p><%= link_to "Trip Details", trip_path(trip) %></p>
+<% if user_signed_in? && current_user.pilot %>
+    <div class="container d-flex flex-column align-items-center justify-center">
+    <h2>Look At Your Trips, Drive Safely</h2>
+        <% @trips.each do |trip| %>
+            <div  div class="card-product card-product-resize">
+                <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                <div class="card-product-infos p-5">
+                    <p>Origin: <%= trip.origin %></p>
+                    <p>Destination: <%= trip.destination %></p>
+                    <p>Trip Price: <%= "#{trip.price} Millions" %></p>
+                    <p>Spaceship Name: <%= trip.spaceship_name %></p>
+                    <p>Max Tripulation: <%= trip.max_tripulation %></p>
+                    <p>How many slots available: <%= trip.max_tripulation %></p>
+                    <p><%= link_to "Trip Details", trip_path(trip) %></p>
+                </div>
             </div>
-        </div>
-    <% end %>
-</div>
+        <% end %>
+    </div>
+<% end %>
+
+
+<% if user_signed_in? && !current_user.pilot %>
+    <div class="container d-flex flex-column align-items-center justify-center">
+    <h2>Look At Your Trips, Have a good time!</h2>
+        <% @tickets.each do |ticket| %>
+            <div  div class="card-product card-product-resize">
+                <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                <div class="card-product-infos p-5">
+                    <p>Pilot: <%= ticket.trip.user.first_name %></p>
+                    <p>Origin: <%= ticket.trip.origin %></p>
+                    <p>Destination: <%= ticket.trip.destination %></p>
+                    <p>Paid Price: <%= "#{ticket.trip.price} Millions" %></p>
+                    <p>Spaceship Name: <%= ticket.trip.spaceship_name %></p>
+                    <p>Travel Date: <%= ticket.trip.launch_date.strftime("%d-%m-%Y") %></p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+<% end %>
