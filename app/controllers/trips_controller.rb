@@ -21,7 +21,7 @@ class TripsController < ApplicationController
 
   def show
     @ticket = Ticket.new
-    @trips = current_user.trips.all
+    @trip = Trip.find(params[:id])
   end
 
   private
