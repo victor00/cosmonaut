@@ -15,8 +15,16 @@
   <% end %>
 
   <% if user_signed_in? && current_user.pilot %>
-    <h2>Welcome! <%= current_user.first_name %></h2>
-    <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-gradient'  %>
+    <div class="container d-flex flex-column align-items-center justify-center py-5 mt-5">
+      <h2>Welcome! <%= current_user.first_name.capitalize %></h2>
+      <div class="card-product">
+        <%= image_tag "card-backgroud" %>
+        <div class="card-product-infos p-5">
+          <h2><strong>As a Pilot</strong>, you can create your own trips:</h2>
+          <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-primary btn-space mt-5'  %>
+        </div>
+      </div>
+    </div>
   <% end %>
 
   <% unless user_signed_in? %>

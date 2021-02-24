@@ -1,0 +1,58 @@
+
+.card-product {
+  margin-top: 100px;
+  overflow: hidden;
+  height: 200px;
+  width: 500px;
+  background: white;
+  box-shadow: 0 0 15px rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+}
+
+.card-product img {
+  height: 100%;
+  width: 250px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product-infos {
+  padding-left: 20px;
+  padding: 16px;
+}
+
+.card-product .card-product-infos h2 {
+  font-family: 'Fredoka One';
+  font-size: 20px;
+  color: #00C2EA;
+}
+
+.btn-space {
+    background-color: #00C2EA;
+    border-color: #00C2EA;
+    border-radius: 25px;
+    transition: 1s ease-in-out .5s;
+    &:hover {
+        -webkit-transition-delay: 0s;
+        -moz-transition-delay: 0s;
+        -ms-transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
+        transition: 0.1s ease-in-out 0.1s;
+        background-color: #008eaa !important;
+    }
+}
