@@ -2,8 +2,8 @@
   <% if user_signed_in? && !current_user.pilot %>
     <h2>Welcome! <%= current_user.first_name %></h2>
     <%= simple_form_for :search, url: root_path, method: "GET" do |f| %>
-      <%= f.input :origin, collection: Trip.pluck(:origin) %>
-      <%= f.input :destination, collection: Trip.pluck(:destination) %>
+      <%= f.input :origin, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)) %>
+      <%= f.input :destination, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)) %>
       <%= f.input :launch_date, collection: Trip.pluck(:launch_date) %>
       <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
     <% end %>
