@@ -43,7 +43,7 @@ class TripsController < ApplicationController
     [
       "spaceship1", "spaceship2", "spaceship3",
       "spaceship4", "spaceship5", "spaceship6",
-      "spaceship7"
+      "spaceship7", "spaceship8", "spaceship9"
     ]
   end
 end

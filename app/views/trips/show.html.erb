@@ -41,7 +41,7 @@
             <%= simple_form_for [@trip, @ticket] do |f| %>
                 <%= f.error :user %>
                 <%= f.input :class_option, collection: Ticket::CLASS_OPTIONS %>
-                <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success" %>
+                <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success", id: "success-sound" %>
             <% end %>
         </div>
     <% end %>
