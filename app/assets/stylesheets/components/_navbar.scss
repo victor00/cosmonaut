@@ -2,16 +2,24 @@
   justify-content: space-between;
   background: transparent;
   font-size: 25px;
-  a {
+  padding: 5px;
+  .nav-link {
     color: #fff !important;
     &:hover {
       border-bottom: 3px solid #fff;
     }
   } 
-  img {
-      width: 80px !important;
-      height: 60px;
-  }
+}
+
+.logo-astro {
+    
+    font-size: 25px;
+    padding-left: 10px;
+    width: 80px !important;
+    height: 60px;
+    &:hover {
+      border-bottom: 3px solid #fff;
+    }
 }
 
 .navbar-lewagon .navbar-collapse {
