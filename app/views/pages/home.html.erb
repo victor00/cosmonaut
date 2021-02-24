@@ -1,21 +1,23 @@
   <% if user_signed_in? && !current_user.pilot %>
 
-     <h2 class="mb-5">Welcome! <%= current_user.first_name %></h2>
-     <h5>Search for a trip:</h5>
-     <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
-      <div class="search-form pr-6">
-        <%= f.input :origin, collection: Trip.pluck(:origin), include_blank: "-- Select Origin --" %>
-        <%= f.input :destination, collection: Trip.pluck(:destination), include_blank: "-- Select Destination --" %>
-        <%= f.input :launch_date, collection: Trip.pluck(:launch_date), include_blank: "-- Select Launch Date --" %>
-        <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
-      </div>
+  <div class="container d-flex flex-column align-items-center justify-center">
+      <h2 class="mb-5 m-5 p-5">
+          Welcome! <%= current_user.first_name %>
+        </h2>
+      <h5>Search for a trip:</h5>
+      <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
+        <div class="search-form pr-6">
+          <%= f.input :origin, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Origin --" %>
+          <%= f.input :destination, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Destination --" %>
+          <%= f.input :launch_date, collection: Trip.pluck(:launch_date).map { |ldate| ldate.strftime("%d-%m-%Y") }, include_blank: "-- Select Launch Date --" %>
+          <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
+        </div>
+      
     <% end %>
 
     
     <% @trips.each do |trip| %>
-    <div>
-      <div  div class="card-product card-product-resize">
-            
+      <div div class="card-product card-product-resize">  
             <div class="card-product-infos p-5">
                 <p>Origin: <%= trip.origin %></p>
                 <p>Destination: <%= trip.destination %></p>
@@ -23,11 +25,13 @@
                 <p>Spaceship Name: <%= trip.spaceship_name %></p>
                 <p>Max Tripulation: <%= trip.max_tripulation %></p>
                 <p>How many slots available: <%= trip.max_tripulation %></p>
-                <p><%= link_to "Trip Details", trip_path(trip) %></p>
-    </div>
+                <p><%= link_to "Buy Ticket", trip_path(trip) %></p>
+              </div>
     <% end %>
+      </div>
+    </div>
   <% end %>
-</div>
+
 
 
   <% if user_signed_in? && current_user.pilot %>

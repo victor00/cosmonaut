@@ -10,7 +10,7 @@
                     <p>Trip Price: <%= "#{trip.price} Millions" %></p>
                     <p>Spaceship Name: <%= trip.spaceship_name %></p>
                     <p>Max Tripulation: <%= trip.max_tripulation %></p>
-                    <p>How many slots available: <%= trip.max_tripulation %></p>
+                    <p>How many slots available: <%= trip.max_tripulation - trip.tickets.count %></p>
                     <p><%= link_to "Trip Details", trip_path(trip) %></p>
                 </div>
             </div>

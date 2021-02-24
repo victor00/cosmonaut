@@ -13,7 +13,7 @@ class TicketsController < ApplicationController
     @ticket.user = current_user
     @ticket.trip = @trip
     if @ticket.save
-      redirect_to ticket_path(@ticket)
+      redirect_to trips_path
     else
       render "trips/show"
     end

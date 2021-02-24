@@ -7,21 +7,15 @@
                 <%= image_tag "card-background-option-2" %>
                 <div class="card-product-infos p-5">
 
-                    <p>Origin: <%= @trip.origin %></p>
-                    <p>Destination: <%= @trip.destination %></p>
-                    <p>Trip Price: <%= "#{@trip.price} Millions" %></p>
-                    <p>Spaceship Name: <%= @trip.spaceship_name %></p>
-                    <p>Max Tripulation: <%= @trip.max_tripulation %></p>
-                    <p>Available Seats: <%= @trip.max_tripulation %></p>   
-               
-                    <% if @trip.tickets.empty? %>
+                    <% if @trip.tickets.empty? %>   
                         <p>No Passengers Yet</p>
                     <% else %>
-                        <ul>
-                            <% @trip.tickets.each do |ticket| %>
-                            <li><%= ticket.user.first_name %></li>
-                            <% end %>
-                        </ul> 
+                            <p><strong>Passengers: </strong></p>
+                            <ul>
+                                <% @trip.tickets.each do |ticket| %>
+                                <li><p><%= ticket.user.first_name %></p></li>
+                                <% end %>
+                            </ul> 
                     <% end %>
                
                 </div>  
@@ -38,7 +32,7 @@
                 <p>Trip Price: <%= "#{@trip.price} Millions" %></p>
                 <p>Spaceship Name: <%= @trip.spaceship_name %></p>
                 <p>Max Tripulation: <%= @trip.max_tripulation %></p>
-                <p>Available Seats: <%= @trip.max_tripulation %></p>
+                <p>Available Seats: <%= @trip.max_tripulation - @trip.tickets.count %></p>
             </div>
         </div>
 

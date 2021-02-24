@@ -106,7 +106,7 @@ puts "Creating Trips\n"
     trip = Trip.new
     trip.origin = origin_planet_start
     trip.destination = destination_planet_diff
-    trip.launch_date = current_date.strftime("%d-%m-%Y")
+    trip.launch_date = current_date
     trip.user = is_pilot(User.all.sample)
     trip.price = rand(1..20)
     trip.max_tripulation = rand(1..10)
