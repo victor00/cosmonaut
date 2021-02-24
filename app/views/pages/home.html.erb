@@ -1,5 +1,5 @@
-<div class="container w-100  ">
   <% if user_signed_in? && !current_user.pilot %>
+
      <h2 class="mb-5">Welcome! <%= current_user.first_name %></h2>
      <h5>Search for a trip:</h5>
      <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
