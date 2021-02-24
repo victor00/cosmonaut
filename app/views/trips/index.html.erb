@@ -1,0 +1,17 @@
+
+<div class="container d-flex flex-column align-items-center justify-center">
+<h2>Look At Your Trips, Drive Safely</h2>
+    <%= @trips.each do |trip| %>
+        <div  div class="card-product card-product-resize">
+            <%= image_tag "star_wars_spaceships/#{@spaceship_images.sample}" %>
+            <div class="card-product-infos p-5">
+                <p>Origin: <%= trip.origin %></p>
+                <p>Destination: <%= trip.destination %></p>
+                <p>Trip Price: <%= "#{trip.price} Millions" %></p>
+                <p>Spaceship Name: <%= trip.spaceship_name %></p>
+                <p>Max Tripulation: <%= trip.max_tripulation %></p>
+                <p>How many slots available: <%= trip.max_tripulation %></p>
+            </div>
+        </div>
+    <% end %>
+</div>

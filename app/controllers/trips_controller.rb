@@ -1,7 +1,8 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show]
   def index
-    @trips = Trip.all
+    @trips = current_user.trips.all
+    @spaceship_images = spaceship_images
   end
 
   def new
@@ -31,5 +32,12 @@ class TripsController < ApplicationController
 
   def set_trip
     @trip = Trip.find(params[:id])
+  end
+
+  def spaceship_images
+    [
+      "starwars-spaceship-option-1", "starwars-spaceship-option-2", "starwars-spaceship-option-3",
+      "starwars-spaceship-option-4"
+    ]
   end
 end
