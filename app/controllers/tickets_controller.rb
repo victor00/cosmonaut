@@ -12,10 +12,10 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.trip = @trip
+
     if @ticket.save
       sleep 10.1
       redirect_to trips_path
-
     else
       render "trips/show"
     end
