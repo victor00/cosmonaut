@@ -18,11 +18,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.trip = @trip
-    if @ticket.save
-      redirect_to trips_path
-    else
-      render "trips/show"
-    end
+
+    render "trips/show" unless @ticket.save
   end
 
   def ticket_params
