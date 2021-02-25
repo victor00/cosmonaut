@@ -1,5 +1,5 @@
 class Ticket < ApplicationRecord
-  CLASS_OPTIONS = %w[A B C]
+  CLASS_OPTIONS = ['First Class', 'Executive Class', 'Economic Class']
 
   belongs_to :user
   belongs_to :trip
