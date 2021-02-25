@@ -45,7 +45,7 @@ user_last_names = [
 
 class_options = %w[A B C]
 
-some_easy_passwords = %w[teste123 hamtaro42 herozero bananas peaches hashtables yougurt]
+some_easy_passwords = "123123"
 
 user_emails = []
 email_endings = %w[
@@ -77,7 +77,7 @@ puts "Creating Users\n"
   
     user = User.create(
         email: user_email,
-        password: some_easy_passwords.sample,
+        password: some_easy_passwords,
         first_name: user_first_names.sample,
         last_name: user_last_names.sample,
         origin_planet: planets.sample,
