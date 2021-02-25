@@ -1,23 +1,39 @@
 <% if user_signed_in? && current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
-    <h2>Here are your Trips, Drive Safely!</h2>
-        <% @trips.each do |trip| %>
-            <div class="card-product card-product-resize">
+    <% unless current_user.trips.empty? %>
+        <h2>Here are your Trips, Drive Safely!</h2>
+            <% @trips.each do |trip| %>
+                <div class="card-product card-product-resize">
 
-                <div class="spaceship-image">
-                    <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
-                </div>
+                    <div class="spaceship-image">
+                        <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                    </div>
 
-                <div class="card-product-infos p-5 text-color-p">
-                    <p><strong>Origin:</strong> <%= trip.origin %></p>
-                    <p><strong>Destination:</strong> <%= trip.destination %></p>
-                    <p><strong>Trip Price:</strong> <%= "#{trip.price} Millions" %></p>
-                    <p><strong>Spaceship Name:</strong> <%= trip.spaceship_name %></p>
-                    <p><strong>Max Tripulation:</strong> <%= trip.max_tripulation %></p>
-                    <p><strong>How many slots available:</strong> <%= trip.max_tripulation - trip.tickets.count %></p>
-                    <p><%= link_to "Trip Details", trip_path(trip) %></p>
+                    <div class="card-product-infos p-5 text-color-p">
+                        <p><strong>Origin:</strong> <%= trip.origin %></p>
+                        <p><strong>Destination:</strong> <%= trip.destination %></p>
+                        <p><strong>Trip Price:</strong> <%= "#{trip.price} Millions" %></p>
+                        <p><strong>Spaceship Name:</strong> <%= trip.spaceship_name %></p>
+                        <p><strong>Max Tripulation:</strong> <%= trip.max_tripulation %></p>
+                        <p><strong>How many slots available:</strong> <%= trip.max_tripulation - trip.tickets.count %></p>
+                        <p><%= link_to "Trip Details", trip_path(trip) %></p>
+                    </div>
                 </div>
-            </div>
+            <% end %>
+        <% else %>
+            <div class="container d-flex flex-column align-items-center justify-center">
+                <div  div class="card-product card-product-resize rounded">
+                    <%= image_tag "no-tickets-show" %>
+                    <div class="card-product-infos">
+                        <% if current_user.tickets.empty? %>   
+                            <p class="pl-5 ml-5">No Trips Yet</p>
+                            <div class="container d-flex flex-row align-items-center justify-center">
+                                <%= link_to "Get A Ticket Now!", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                                <%= link_to "Create your Trip Now!", new_trip_path, class: "btn btn-success mt-5 ml-5"  %>
+                            </div>
+                        <% end %>
+                    </div>  
+                </div>
         <% end %>
     </div>
 <% end %>
@@ -25,23 +41,38 @@
 
 <% if user_signed_in? && !current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
-    <h2>Here are your Trips, Enjoy the Journey!</h2>
-        <% @tickets.each do |ticket| %>
-            <div class="card-product card-product-resize">
+        <% unless current_user.tickets.empty? %>
+            <h2>Here are your Trips, Enjoy the Journey!</h2>
+                <% @tickets.each do |ticket| %>
+                    <div class="card-product card-product-resize">
 
-                <div class="spaceship-image">
-                    <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                        <div class="spaceship-image">
+                            <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                        </div>
+                        
+                        <div class="card-product-infos p-5 text-color-p">
+                            <p><strong>Pilot:</strong> <%= ticket.trip.user.first_name %></p>
+                            <p><strong>Origin:</strong> <%= ticket.trip.origin %></p>
+                            <p><strong>Destination:</strong> <%= ticket.trip.destination %></p>
+                            <p><strong>Paid Price:</strong> <%= "#{ticket.trip.price} Millions" %></p>
+                            <p><strong>Spaceship Name:</strong> <%= ticket.trip.spaceship_name %></p>
+                            <p><strong>Travel Date:</strong> <%= ticket.trip.launch_date.strftime("%d-%m-%Y") %></p>
+                        </div>
+                    </div>
+                <% end %>
+        <% else %>
+            <div class="container d-flex flex-column align-items-center justify-center">
+                <div  div class="card-product card-product-resize rounded">
+                    <%= image_tag "no-tickets-show" %>
+                    <div class="card-product-infos p-5 ">
+                        <% if current_user.tickets.empty? %>   
+                            <p class="pl-5">No Tickets Yet</p>
+                            <%= link_to "Get A Ticket Now", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                        <% end %>
+                    </div>  
                 </div>
-                
-                <div class="card-product-infos p-5 text-color-p">
-                    <p><strong>Pilot:</strong> <%= ticket.trip.user.first_name %></p>
-                    <p><strong>Origin:</strong> <%= ticket.trip.origin %></p>
-                    <p><strong>Destination:</strong> <%= ticket.trip.destination %></p>
-                    <p><strong>Paid Price:</strong> <%= "#{ticket.trip.price} Millions" %></p>
-                    <p><strong>Spaceship Name:</strong> <%= ticket.trip.spaceship_name %></p>
-                    <p><strong>Travel Date:</strong> <%= ticket.trip.launch_date.strftime("%d-%m-%Y") %></p>
-                </div>
-            </div>
         <% end %>
     </div>
 <% end %>
+
+<%= audio_tag "starman.mp3", id: "starman" %>
