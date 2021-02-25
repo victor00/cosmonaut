@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   def index
-    @tickets = current_user.tickets.all
+    @tickets = current_user.tickets
   end
 
   def show
@@ -13,7 +13,11 @@ class TicketsController < ApplicationController
     @ticket.user = current_user
     @ticket.trip = @trip
 
-    render "trips/show" unless @ticket.save
+    if @ticket.save
+      redirect_to trips_path(play_song: true)
+    else
+      render "trips/show"
+    end
   end
 
   def ticket_params

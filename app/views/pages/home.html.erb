@@ -1,42 +1,36 @@
-  <% if user_signed_in? && !current_user.pilot %>
-
+  <% if user_signed_in? %>
   <div class="container d-flex flex-column align-items-center justify-center">
-      <h2 class="mb-5 m-5 p-5">
-          Welcome! <%= current_user.first_name %>
-        </h2>
-      <h5>Search for a trip:</h5>
-      <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
-        <div class="search-form pr-6">
-          <%= f.input :origin, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Origin --" %>
-          <%= f.input :destination, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Destination --" %>
-          <%= f.input :launch_date, collection: Trip.pluck(:launch_date).map { |date| date.strftime("%b %d, %Y") }, include_blank: "-- Select Launch Date --" %>
-          <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
-        </div>
-      
-    <% end %>
+      <h2>
+          Welcome! <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %>
+      </h2>
 
-    
-    <% @trips.each do |trip| %>
-      <div div class="card-product card-product-resize">  
-            <div class="card-product-infos p-5">
-                <p>Origin: <%= trip.origin %></p>
-                <p>Destination: <%= trip.destination %></p>
-                <p>Trip Price: <%= "#{trip.price} Millions" %></p>
-                <p>Spaceship Name: <%= trip.spaceship_name %></p>
-                <p>Max Tripulation: <%= trip.max_tripulation %></p>
-                <p>How many slots available: <%= trip.max_tripulation %></p>
-                <p><%= link_to "Buy Ticket", trip_path(trip) %></p>
-              </div>
-    <% end %>
-      </div>
+      <h5>Search for a trip:</h5>
+          <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
+            <div class="search-form pr-6">
+              <%= f.input :origin, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Origin --" %>
+              <%= f.input :destination, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Destination --" %>
+              <%= f.input :launch_date, collection: Trip.pluck(:launch_date).map { |date| date.strftime("%b %d, %Y") }, include_blank: "-- Select Launch Date --" %>
+              <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+        
+      <% @trips.each do |trip| %>
+        <div div class="card-product card-product-resize">  
+              <div class="card-product-infos p-5">
+                  <p>Origin: <%= trip.origin %></p>
+                  <p>Destination: <%= trip.destination %></p>
+                  <p>Trip Price: <%= "#{trip.price} Millions" %></p>
+                  <p>Spaceship Name: <%= trip.spaceship_name %></p>
+                  <p>Max Tripulation: <%= trip.max_tripulation %></p>
+                  <p>How many slots available: <%= trip.max_tripulation %></p>
+                  <p><%= link_to "Buy Ticket", trip_path(trip) %></p>
+                </div>
+      <% end %>
+        </div>
     </div>
   <% end %>
 
-
-
   <% if user_signed_in? && current_user.pilot %>
-    <div class="container d-flex flex-column align-items-center justify-center py-5 mt-5 ">
-      <h2>Welcome! <%= current_user.first_name.capitalize %></h2>
       <div class="card-product">
         <%= image_tag "card-background" %>
         <div class="card-product-infos p-5">
@@ -44,7 +38,6 @@
           <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-primary btn-space mt-5'  %>
         </div>
       </div>
-    </div>
   <% end %>
 
   <% unless user_signed_in? %>
