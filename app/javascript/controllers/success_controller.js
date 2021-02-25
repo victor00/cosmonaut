@@ -5,7 +5,7 @@ import { Controller } from 'stimulus';
 
 export default class extends Controller {
 	static get targets() {
-		return ['trigger'];
+		return ['trigger', 'hidden'];
 	}
 
 	connect() {
@@ -15,11 +15,13 @@ export default class extends Controller {
 	play() {
 		const sound = new Audio(this.triggerTarget.dataset.sound);
 		sound.play();
+		
+		this.hiddenTarget.classList.add("d-none");
+
 		this.triggerTarget.value = 'Thank You For Your Purchase!';
 		this.triggerTarget.setAttribute('disabled', '');
 		sound.addEventListener('ended', () => {
-			this.triggerTarget.removeAttribute('disabled');
-			this.triggerTarget.value = this.originalTriggerText;
+			window.location.replace(this.triggerTarget.dataset.redirect)
 		});
 	}
 }

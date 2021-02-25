@@ -31,7 +31,7 @@
                 <%= image_tag "card-background-option-2" %>
             </div>
              
-            <div class="card-product-infos pt-3 pr-3 pl-3 pb-0 text-color-p" >
+            <div data-controller="success" class="card-product-infos pt-3 pr-3 pl-3 pb-0 text-color-p" >
                 <p><strong>Origin:</strong> <%= @trip.origin %></p>
                 <p><strong>Destination:</strong> <%= @trip.destination %></p>
                 <p><strong>Price:</strong> <%= "#{@trip.price} Millions" %></p>
@@ -47,11 +47,15 @@
                                     include_blank: false,
                                     label: false,
                                     collection: Ticket::CLASS_OPTIONS,
-                                    wrapper_html: {class: 'mb-0'}
+                                    wrapper_html: { class: 'mb-0',  data: {"success-target": "hidden"} }            
                         %>
-                        <div data-controller="success">
+                        <div>
                             <%= f.submit "Buy Ticket", class: "btn btn-success", id: "buy-button",
-                                data: { action: "click->success#play", "success-target": "trigger", sound: (audio_path "starman.mp3")} %>
+                                data: { action: "click->success#play",
+                                        "success-target": "trigger",
+                                        sound: (audio_path "starman.mp3"),
+                                        redirect: trips_path
+                                    } %>
                        </div>
                     </div>
                   <% end %>  
