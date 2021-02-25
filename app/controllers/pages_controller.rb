@@ -6,7 +6,12 @@ class PagesController < ApplicationController
     @search_origin = params.dig :search, :origin
     @search_destination = params.dig :search, :destination
     @search_launch_date = params.dig :search, :launch_date
-    @trips = Trip.where("origin = :origin and destination = :destination and launch_date = :launch_date",
-                        { origin: @search_origin, destination: @search_destination, launch_date: @search_launch_date })
+    @trips = Trip.all 
+    @trips = @trips.where(origin: @search_origin) if @search_origin.present?
+    @trips = @trips.where(destination: @search_destination) if @search_destination.present?
+    @trips = @trips.where(launch_date: @search_launch_date) if @search_launch_date.present?
+    @trips = @trips.select {|trip|  (trip.max_tripulation - trip.tickets.count).positive?}
   end
 end
+
+
