@@ -38,10 +38,10 @@
         </div>
 
         <div class="container mt-5 pt-5 w-50">
-            <%= simple_form_for [@trip, @ticket] do |f| %>
+            <%= simple_form_for [@trip, @ticket], html: {id: "success-sound"} do |f| %>
                 <%= f.error :user %>
                 <%= f.input :class_option, collection: Ticket::CLASS_OPTIONS %>
-                <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success", id: "success-sound" %>
+                <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success" %>
             <% end %>
         </div>
     <% end %>

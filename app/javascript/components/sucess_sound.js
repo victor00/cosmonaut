@@ -2,12 +2,12 @@
 
 
 
-
 const sound = () => {
-    const broughtTicket = document.querySelector('#success-sound');
-	broughtTicket.addEventListener('click', () => {
-		const audio = new Audio('/app/assets/starman.mp3');
-		audio.play();
+    const audio = new Audio('star.mp3');
+    const broughtTicket = document.getElementById('success-sound');
+	broughtTicket.addEventListener('submit', () => {
+		console.log('Playing audio');
+    audio.play();
 		// broughtTicket.disabled = true;
 	});
 }
