@@ -35,6 +35,52 @@
   padding: 16px;
 }
 
+// Ticket info & buy ticket screen
+
+.title-ticket {
+  color: #ffffff;
+  padding-bottom: 5px;
+}
+
+#class-selection-card {
+  padding: 25px;
+  margin-top: 0px;
+  height: 200px;
+  width: 500px;
+  border-radius: 25px;
+  // background-color: rgb(187, 187, 187);
+}
+
+
+.select.optional {
+  color: black;
+  margin-top: 0px;
+  white-space: nowrap;
+}
+
+#info-end {
+  margin-bottom: 30px;
+}
+
+#ticket_class_option {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.selection-button {
+  display: inline-block;
+  align-items: center;
+}
+
+#buy-button {
+  color: #ffffff;
+  align-items: baseline;
+  height: 35px;
+  padding: 6px;
+}
+
+//
 .card-product .card-product-infos h2 {
   font-family: 'Fredoka One';
   font-size: 20px;
