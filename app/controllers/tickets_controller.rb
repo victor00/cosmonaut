@@ -13,7 +13,9 @@ class TicketsController < ApplicationController
     @ticket.user = current_user
     @ticket.trip = @trip
     if @ticket.save
+      sleep 10.1
       redirect_to trips_path
+
     else
       render "trips/show"
     end

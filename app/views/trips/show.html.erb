@@ -25,7 +25,7 @@
 
     <% if user_signed_in? && !current_user.pilot %>
         <div class="container d-flex flex-column align-items-center justify-center">
-           <div  div class="card-product card-product-resize">
+           <div class="card-product card-product-resize">
             <%= image_tag "card-background-option-2" %>
             <div class="card-product-infos p-5">
                 <p>Origin: <%= @trip.origin %></p>
@@ -42,7 +42,7 @@
                 <%= f.error :user %>
                 <%= f.input :class_option, collection: Ticket::CLASS_OPTIONS %>
                 <div data-controller="success">
-                    <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success", id: "success-sound",
+                    <%= f.submit "Buy a Ticket for this Trip", class: "btn btn-success",
                         data: { action: "click->success#play", "success-target": "trigger", sound: (audio_path "starman.mp3")} %>
                 </div>
             <% end %>
