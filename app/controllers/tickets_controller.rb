@@ -15,7 +15,12 @@ class TicketsController < ApplicationController
     @ticket.user = current_user
     @ticket.trip = @trip
 
-    if @ticket.save
+    if @ticket.save && current_user.pilot
+      redirect_to broughts_path(play_song: true)
+      return
+    end
+
+    if @ticket.save && !current_user.pilot
       redirect_to trips_path(play_song: true)
     else
       render "trips/show"
