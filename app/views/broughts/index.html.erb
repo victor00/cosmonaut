@@ -1,3 +1,4 @@
+<%# List all current_Pilot Tickets %>
 <% if user_signed_in? && current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
         <% unless current_user.tickets.empty? %>
@@ -20,6 +21,7 @@
                     </div>
                 <% end %>
         <% else %>
+            <%# Option to Buy Tickets If doesn't have any %>
             <div class="container d-flex flex-column align-items-center justify-center">
                 <div  div class="card-product card-product-resize rounded">
                     <%= image_tag "no-tickets-show" %>
