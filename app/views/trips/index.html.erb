@@ -1,3 +1,4 @@
+<%# If current_Pilot has any Trips - List all Trips  %>
 <% if user_signed_in? && current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
     <% unless current_user.trips.empty? %>
@@ -21,6 +22,7 @@
                 </div>
             <% end %>
         <% else %>
+            <%# if Pilot has no tickets - Show Options to Buy Tickets and Create a Trip  %>
             <div class="container d-flex flex-column align-items-center justify-center">
                 <div  div class="card-product card-product-resize rounded">
                     <%= image_tag "no-tickets-show" %>
@@ -38,7 +40,7 @@
     </div>
 <% end %>
 
-
+<%# if Passenger has any Tickets = List all Tickets %>
 <% if user_signed_in? && !current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
         <% unless current_user.tickets.empty? %>
@@ -61,6 +63,7 @@
                     </div>
                 <% end %>
         <% else %>
+            <%# Show Passengers an option to buy tickets if he hasn't any tickets. %>
             <div class="container d-flex flex-column align-items-center justify-center">
                 <div  div class="card-product card-product-resize rounded">
                     <%= image_tag "no-tickets-show" %>
@@ -74,5 +77,5 @@
         <% end %>
     </div>
 <% end %>
-
+<%# Audio played when a ticket is bought  %>
 <%= audio_tag "starman.mp3", id: "starman" %>
