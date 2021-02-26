@@ -1,7 +1,7 @@
 <% if user_signed_in? && current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
         <% unless current_user.tickets.empty? %>
-            <h2>Here are your Trips, Enjoy the Journey!</h2>
+            <h2>Here are your Tickets, Enjoy the Journey!</h2>
                 <% @tickets.each do |ticket| %>
                     <div class="card-product card-product-resize">
 
