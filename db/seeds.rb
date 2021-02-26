@@ -7,6 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+puts "Dropping database"
+
+User.destroy_all
+Trip.destroy_all
+Ticket.destroy_all
+
 spaceship_names = [
     "Tardis", "Bebop", "Apollo", "Ares", "Nimbus", "X-Wing",
     "Destroyer", "Millennium Falcon", "Galactic Empire", "Space Cruiser",
@@ -43,7 +49,13 @@ user_last_names = [
     "Snyde", "Snape", "Dent", "Perfect", "Beeblebrox", "Slartibartfast"
 ]
 
-class_options = %w[A B C]
+spaceship_photos = [
+      "spaceship1.png", "spaceship2.png", "spaceship3.png",
+      "spaceship4.png", "spaceship5.png", "spaceship6.png",
+      "spaceship7.png", "spaceship8.png", "spaceship9.jpeg"
+    ]
+
+class_options = ["First Class", "Executive Class", "Economic Class"]
 
 some_easy_passwords = "123123"
 
@@ -56,7 +68,7 @@ email_endings = %w[
 
 # Setting emails trying to generate maximum uniques emails
 puts "Setting user emails"
-50.times do 
+100.times do 
     user_emails << "#{Faker::Ancient.god}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
     user_emails << "#{Faker::Ancient.primordial}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
     user_emails << "#{Faker::Ancient.titan}_#{Faker::Space.constellation}#{email_endings.sample}".gsub(" ", "")
@@ -71,17 +83,17 @@ user_emails.uniq!
 
 # User.pluck(:email) == User.all.map(&:email)
 puts "Creating Users\n"
-15.times do
+50.times do
     user_email = user_emails.sample
     user_email = user_emails.sample until (User.pluck(:email).exclude?(user_email))
   
-    user = User.create(
+    user = User.create!(
         email: user_email,
         password: some_easy_passwords,
         first_name: user_first_names.sample,
         last_name: user_last_names.sample,
         origin_planet: planets.sample,
-        pilot: [true, false].sample
+        pilot: rand(100) < 50
     )
 
     puts "\n#{user.id} - User Created - #{user.email}\n"
@@ -92,26 +104,25 @@ puts "Setting up Date"
 current_date = Time.now
 # date_now = Date.now.parse('%d-%m-%Y')
 
-def is_pilot(user_sample)
-    is_pilot(User.all.sample) unless user_sample.pilot
-    user_sample if user_sample.pilot
-end
-
 puts "Creating Trips\n"
 20.times do 
     origin_planet_start = planets.sample
     destination_planet_diff = planets.sample
     destination_planet_diff = planets.sample until origin_planet_start != destination_planet_diff
 
-    trip = Trip.new
-    trip.origin = origin_planet_start
-    trip.destination = destination_planet_diff
-    trip.launch_date = current_date
-    trip.user = is_pilot(User.all.sample)
-    trip.price = rand(1..20)
-    trip.max_tripulation = rand(1..10)
-    trip.spaceship_name = spaceship_names.sample
-    trip.save
+    user_const = User.where(pilot: true).sample
+
+    trip = Trip.create!(
+        origin: origin_planet_start,
+        destination: destination_planet_diff,
+        launch_date: current_date,
+        user: user_const,
+        price: rand(1..20),
+        max_tripulation: rand(1..10),
+        spaceship_name: spaceship_names.sample
+        # spaceship_photo: spaceship_photos.sample
+    )
+   
     
     current_date += 1.day
     current_date += 10.year
@@ -119,20 +130,30 @@ puts "Creating Trips\n"
     puts "_" * 55
 end
 
+def unique_user(user_sample, trip_sample)
+    # if Ticket.pluck(:user_id).include?(user_sample.id) 
+    if user_sample.tickets.include?(trip_sample.id)
+        # Ticket.pluck(:trip_id).include?(trip_sample.id)
+        unique_user(User.all.sample, Trip.all.sample)
+    end
+    [user_sample, trip_sample]
+end
+
 puts "Creating Tickets\n"
-30.times do
-    # trip_result = Trip.all.sample
-    # max = Trip.where(id: trip_result.id).count(:user_id)
+Trip.all.each do |trip|
 
-
-    # unless trip_result.max_tripulation == max
-        ticket = Ticket.create(
-            user: User.all.sample,
-            trip: Trip.all.sample,
+    rand(0..trip.max_tripulation).times do
+        trip.reload
+        user = User.where.not(id: trip.user_ids).sample
+        ticket = Ticket.create!(
+            user: user,
+            trip: trip,
             class_option: class_options.sample,
             rating: rand(1..5)
         )
-  
-    puts "\n#{ticket.id} - Ticket Created \n"
-    puts "_" * 55
+    
+        puts "\n#{ticket.id} - Ticket Created \n"
+        puts "_" * 55
+    end    
 end
+
