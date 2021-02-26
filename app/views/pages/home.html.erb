@@ -1,4 +1,4 @@
-  <%# Home will render Welcome to the logged users  %>
+  <%# Home will render Welcome to the logged users %>
   <% if user_signed_in? %>
   <div class="container d-flex flex-column align-items-center justify-center">
       <h2 class="mt-5 py-2">
@@ -27,7 +27,7 @@
               <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
             </div>
         <% end %>
-      <%# Show Search Results (Trips)  %>
+      <%# Show Search Results (Trips) %>
       <% @trips.each do |trip| %>
         <div class="card-product card-product-resize">  
               <div class="card-product-infos p-5">
@@ -45,7 +45,7 @@
   <% end %>
 
  
-  <%# Public Home Page - Unlogged Users  %>
+  <%# Public Home Page - Unlogged Users %>
   <% unless user_signed_in? %>
     <div class="container d-flex flex-column align-items-center justify-center glow">
       <h1>Welcome to Cosmonaut <i class="fas fa-space-shuttle header-icon"></i></h1><br>

@@ -1,3 +1,4 @@
+<%# Partial Form to New Trips %>
 <%= simple_form_for trip do |f| %>
     <%= f.input :origin, label: 'Origin Planet: ', collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Origin --"%><br>
     <%= f.input :destination, label: 'Destination Planet: ', collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Destination --" %><br>
@@ -9,4 +10,4 @@
       <%= f.submit class: 'btn btn-success mt-2 mb-5 mr-5 w-50' %>
       <%= link_to "Back to Home",  root_path, class: 'btn btn-primary mt-2 mb-5'  %>
     </div>
-  <% end %>
+<% end %>
