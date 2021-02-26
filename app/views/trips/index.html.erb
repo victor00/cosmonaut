@@ -2,6 +2,7 @@
     <div class="container d-flex flex-column align-items-center justify-center">
     <% unless current_user.trips.empty? %>
         <h2>Here are your Trips, Drive Safely!</h2>
+        <h3><%= link_to "See your Tickets",  broughts_path() %></h3>
             <% @trips.each do |trip| %>
                 <div class="card-product card-product-resize">
 

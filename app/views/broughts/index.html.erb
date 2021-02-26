@@ -1,0 +1,35 @@
+<% if user_signed_in? && current_user.pilot %>
+    <div class="container d-flex flex-column align-items-center justify-center">
+        <% unless current_user.tickets.empty? %>
+            <h2>Here are your Trips, Enjoy the Journey!</h2>
+                <% @tickets.each do |ticket| %>
+                    <div class="card-product card-product-resize">
+
+                        <div class="spaceship-image">
+                            <%# <%= image_tag "spaceship_images/#{@spaceship_images.sample}" %>
+                        </div>
+                        
+                        <div class="card-product-infos p-5 text-color-p">
+                            <p><strong>Pilot:</strong> <%= ticket.trip.user.first_name %></p>
+                            <p><strong>Origin:</strong> <%= ticket.trip.origin %></p>
+                            <p><strong>Destination:</strong> <%= ticket.trip.destination %></p>
+                            <p><strong>Paid Price:</strong> <%= "#{ticket.trip.price} Millions" %></p>
+                            <p><strong>Spaceship Name:</strong> <%= ticket.trip.spaceship_name %></p>
+                            <p><strong>Travel Date:</strong> <%= ticket.trip.launch_date.strftime("%d-%m-%Y") %></p>
+                        </div>
+                    </div>
+                <% end %>
+        <% else %>
+            <div class="container d-flex flex-column align-items-center justify-center">
+                <div  div class="card-product card-product-resize rounded">
+                    <%= image_tag "no-tickets-show" %>
+                    <div class="card-product-infos p-5 ">
+                        <% if current_user.tickets.empty? %>   
+                            <p class="pl-5">No Tickets Yet</p>
+                            <%= link_to "Get A Ticket Now", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                        <% end %>
+                    </div>  
+                </div>
+        <% end %>
+    </div>
+<% end %>

@@ -2,9 +2,9 @@ class TripsController < ApplicationController
   before_action :set_trip, only: %i[show]
   def index
     if current_user.pilot
-      @trips = current_user.trips.all
+      @trips = current_user.trips
     else
-      @tickets = current_user.tickets.all
+      @tickets = current_user.tickets
     end
     @spaceship_images = spaceship_images
   end
@@ -24,8 +24,8 @@ class TripsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.new
     @trip = Trip.find(params[:id])
+    @ticket = Ticket.new
   end
 
   private

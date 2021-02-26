@@ -1,29 +1,29 @@
 
  
 
-    <% if user_signed_in? && current_user.pilot %>
+    <% if user_signed_in? && current_user.pilot && current_user.trips.include?(@trip)  %>
         <div class="container d-flex flex-column align-items-center justify-center">
              <div  div class="card-product card-product-resize">
                 <%= image_tag "card-background-option-2" %>
                 <div class="card-product-infos p-5">
-
-                    <% if @trip.tickets.empty? %>   
-                        <p>No Passengers Yet</p>
-                    <% else %>
-                            <p><strong>Travel Date:</strong> <%= @trip.launch_date.strftime("%d-%m-%Y") %></p>
-                            <p><strong>Passengers: </strong></p>
-                            <ul>
-                                <% @trip.tickets.each do |ticket| %>
-                                <li><p><%= ticket.user.first_name %></p></li>
-                                <% end %>
-                            </ul> 
-                    <% end %>
-               
+                    
+                        <% if @trip.tickets.empty? && current_user.trips.include?(@trip) %>   
+                            <p>No Passengers Yet</p>
+                        <% else %>
+                                <p><strong>Travel Date:</strong> <%= @trip.launch_date.strftime("%d-%m-%Y") %></p>
+                                <p><strong>Passengers: </strong></p>
+                                <ul>
+                                    <% @trip.tickets.each do |ticket| %>
+                                    <li><p><%= ticket.user.first_name %> <%= ticket.user.last_name %></p></li>
+                                    <% end %>
+                                </ul> 
+                        <% end %>
                 </div>  
         </div>
     <% end %>
 
-    <% if user_signed_in? && !current_user.pilot %>
+    <% if user_signed_in? %>
+     <% unless current_user.pilot && current_user.trips.include?(@trip) %>
         <div class="container d-flex flex-column align-items-center justify-center">
           <h2 class="title-ticket">Your Trip Info:</h2>
            <div class="card-product card-product-resize" id="class-selection-card">
@@ -40,6 +40,7 @@
                 <div id="info-end">
                   <p><strong>Available Seats:</strong> <%= @trip.max_tripulation - @trip.tickets.count %></p>
                 </div>
+               
                   <%= simple_form_for [@trip, @ticket] do |f| %>
                       <%= f.error :user %>
                       <div class="d-flex align-items-center">
@@ -54,7 +55,9 @@
                        </div>
                     </div>
                   <% end %>  
+              
             </div>
-        </div>    
+        </div> 
+        <% end %>     
     <% end %>
     

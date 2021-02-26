@@ -9,6 +9,8 @@ class TicketsController < ApplicationController
 
   def create
     @trip = Trip.find(params[:trip_id])
+    return if current_user.pilot && current_user.trips.include?(@trip)
+
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.trip = @trip

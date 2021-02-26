@@ -1,15 +1,26 @@
   <% if user_signed_in? %>
   <div class="container d-flex flex-column align-items-center justify-center">
-      <h2>
+      <h2 class="mt-5 py-2">
           Welcome! <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %>
       </h2>
-
-      <h5>Search for a trip:</h5>
+       <% if user_signed_in? && current_user.pilot %>
+          <div class="card-product mb-5 pb-5">
+            <%= image_tag "card-background" %>
+            <div class="card-product-infos p-5">
+              <h2 class="py-3 mt-5"><strong>As a Pilot</strong>, you can create your own trips:</h2>
+              <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-primary btn-space mt-5'  %>
+            </div>
+          </div>
+      <% end %>
+      <h5 class="pt-3 mt-3">Search for a trip:</h5>
           <%= simple_form_for :search, wrapper: :inline_form, html: { class: 'form-inline  mt-3' }, url: root_path, method: "GET" do |f| %>
-            <div class="search-form pr-6">
+            <div class="search-form pr-5">
               <%= f.input :origin, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Origin --" %>
               <%= f.input :destination, collection: Set.new(Trip.pluck(:origin) + Trip.pluck(:destination)), include_blank: "-- Select Destination --" %>
               <%= f.input :launch_date, collection: Trip.pluck(:launch_date).map { |date| date.strftime("%b %d, %Y") }, include_blank: "-- Select Launch Date --" %>
+
+              <%= hidden_field_tag 'sent_search', 'true'  %>  
+
               <%= f.submit 'Find a Trip', class: 'btn btn-primary' %>
             </div>
         <% end %>
@@ -22,23 +33,15 @@
                   <p>Trip Price: <%= "#{trip.price} Millions" %></p>
                   <p>Spaceship Name: <%= trip.spaceship_name %></p>
                   <p>Max Tripulation: <%= trip.max_tripulation %></p>
-                  <p>How many slots available: <%= trip.max_tripulation %></p>
+                  <p>How many slots available: <%= trip.max_tripulation - trip.tickets.count %></p>
                   <p><%= link_to "Buy Ticket", trip_path(trip) %></p>
                 </div>
-      <% end %>
         </div>
+        <% end %>
     </div>
   <% end %>
 
-  <% if user_signed_in? && current_user.pilot %>
-      <div class="card-product">
-        <%= image_tag "card-background" %>
-        <div class="card-product-infos p-5">
-          <h2><strong>As a Pilot</strong>, you can create your own trips:</h2>
-          <%= link_to 'Create your Trip',  new_trip_path, class: 'btn btn-primary btn-space mt-5'  %>
-        </div>
-      </div>
-  <% end %>
+ 
 
   <% unless user_signed_in? %>
     <div class="container d-flex flex-column align-items-center justify-center glow">
