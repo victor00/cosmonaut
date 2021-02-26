@@ -1,3 +1,5 @@
+// Layout for the navbar (main component)
+
 .navbar-lewagon {
   justify-content: space-between;
   background: transparent;
@@ -6,6 +8,8 @@
   margin-bottom: 10px;
   padding-bottom: 15px;
 }
+
+// Options on navbar, with hover
 
 .nav-link {
     color: #fff !important;
@@ -19,11 +23,15 @@ a:hover {
       border-bottom: 1px solid #fff;
 }
 
+// Cosmonaut logo
+
 .logo-astro {
     font-size: 25px;
     width: 80px !important;
     height: 60px;
 }
+
+// Layout and spacing for navbar 
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
@@ -36,3 +44,5 @@ a:hover {
 .nav-item {
   padding-left: 15px;
 }
+
+//
