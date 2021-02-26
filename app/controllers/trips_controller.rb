@@ -1,11 +1,8 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show]
   def index
-    if current_user.pilot
-      @trips = current_user.trips
-    else
-      @tickets = current_user.tickets
-    end
+    @trips = current_user.trips
+    @tickets = current_user.tickets
     @spaceship_images = spaceship_images
   end
 

@@ -20,23 +20,26 @@
                     </div>
                 </div>
             <% end %>
-        <% else %>
-            <div class="container d-flex flex-column align-items-center justify-center">
-                <div  div class="card-product card-product-resize rounded">
-                    <%= image_tag "no-tickets-show" %>
-                    <div class="card-product-infos">
-                        <% if current_user.tickets.empty? %>   
-                            <p class="pl-5 ml-5">No Trips Yet</p>
-                            <div class="container d-flex flex-row align-items-center justify-center">
-                                <%= link_to "Get A Ticket Now!", root_path, class: "btn btn-primary mt-5 ml-5"  %>
-                                <%= link_to "Create your Trip Now!", new_trip_path, class: "btn btn-success mt-5 ml-5"  %>
-                            </div>
-                        <% end %>
-                    </div>  
-                </div>
-        <% end %>
+      <% else %>
+          <div class="container d-flex flex-column align-items-center justify-center">
+              <div  div class="card-product card-product-resize rounded">
+                  <%= image_tag "no_trips_created" %>
+                  <div class="card-product-infos p-5 text-color-p">
+                          <h3 class="no-trip pl-5">You haven't created any trips yet</h3> 
+                          <p class="above-button pl-5 mt-5">You can browse tickets and create trips clicking the buttons below:</p>
+                          <div class="container d-flex flex-row align-items-center justify-center">
+                              <%= link_to "Get a Ticket", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                              <%= link_to "Create a Trip", new_trip_path, class: "btn btn-success mt-5 ml-5"  %>
+                          </div>
+                  </div>  
+              </div>
+          </div>
+      <% end %>
     </div>
 <% end %>
+
+
+
 
 
 <% if user_signed_in? && !current_user.pilot %>
@@ -65,9 +68,10 @@
                 <div  div class="card-product card-product-resize rounded">
                     <%= image_tag "no-tickets-show" %>
                     <div class="card-product-infos p-5 ">
-                        <% if current_user.tickets.empty? %>   
-                            <p class="pl-5">No Tickets Yet</p>
-                            <%= link_to "Get A Ticket Now", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                        <% if current_user.tickets.empty? %>  
+                            <h3 class="no-ticket pl-5">You don't have any tickets yet</h3> 
+                            <p class="pl-5 mt-5">You can browse and buy tickets clicking the button below:</p>
+                            <%= link_to "Get A Ticket Now", root_path, class: "btn btn-primary mt-4 ml-5"  %>
                         <% end %>
                     </div>  
                 </div>
