@@ -36,6 +36,7 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
 
+  # Get random images to display on views
   def spaceship_images
     [
       "spaceship1", "spaceship2", "spaceship3",

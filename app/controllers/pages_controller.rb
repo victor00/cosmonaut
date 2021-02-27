@@ -3,11 +3,19 @@ class PagesController < ApplicationController
 
   def home
     @trip = Trip.new
-    @search_origin = params.dig :search, :origin
-    @search_destination = params.dig :search, :destination
-    @search_launch_date = params.dig :search, :launch_date
 
-    if params[:sent_search] == "true"
+    search(params)
+  end
+
+  private
+
+  # search tickets from user input
+  def search(search_params)
+    @search_origin = search_params.dig :search, :origin
+    @search_destination = search_params.dig :search, :destination
+    @search_launch_date = search_params.dig :search, :launch_date
+
+    if search_params[:sent_search] == "true"
       @trips = Trip.all
       @trips = @trips.where(origin: @search_origin) if @search_origin.present?
       @trips = @trips.where(destination: @search_destination) if @search_destination.present?

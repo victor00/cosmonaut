@@ -1,3 +1,4 @@
+<%# If current_Pilot has any Trips - List all Trips  %>
 <% if user_signed_in? && current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
     <% unless current_user.trips.empty? %>
@@ -20,6 +21,26 @@
                     </div>
                 </div>
             <% end %>
+        <% else %>
+            <%# if Pilot has no tickets - Show Options to Buy Tickets and Create a Trip  %>
+            <div class="container d-flex flex-column align-items-center justify-center">
+                <div  div class="card-product card-product-resize rounded">
+                    <%= image_tag "no-tickets-show" %>
+                    <div class="card-product-infos">
+                        <% if current_user.tickets.empty? %>   
+                            <p class="pl-5 ml-5">No Trips Yet</p>
+                            <div class="container d-flex flex-row align-items-center justify-center">
+                                <%= link_to "Get A Ticket Now!", root_path, class: "btn btn-primary mt-5 ml-5"  %>
+                                <%= link_to "Create your Trip Now!", new_trip_path, class: "btn btn-success mt-5 ml-5"  %>
+                            </div>
+                        <% end %>
+                    </div>  
+                </div>
+        <% end %>
+    </div>
+<% end %>
+
+<%# if Passenger has any Tickets = List all Tickets %>
       <% else %>
           <div class="container d-flex flex-column align-items-center justify-center">
               <div  div class="card-product card-product-resize rounded">
@@ -37,10 +58,6 @@
       <% end %>
     </div>
 <% end %>
-
-
-
-
 
 <% if user_signed_in? && !current_user.pilot %>
     <div class="container d-flex flex-column align-items-center justify-center">
@@ -64,6 +81,7 @@
                     </div>
                 <% end %>
         <% else %>
+            <%# Show Passengers an option to buy tickets if he hasn't any tickets. %>
             <div class="container d-flex flex-column align-items-center justify-center">
                 <div  div class="card-product card-product-resize rounded">
                     <%= image_tag "no-tickets-show" %>
@@ -78,5 +96,5 @@
         <% end %>
     </div>
 <% end %>
-
+<%# Audio played when a ticket is bought  %>
 <%= audio_tag "starman.mp3", id: "starman" %>
