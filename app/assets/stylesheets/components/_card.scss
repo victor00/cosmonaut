@@ -1,3 +1,4 @@
+//  Card Product layout (Card main component)
 
 .card-product {
   margin-top: 100px;
@@ -10,17 +11,23 @@
   align-items: center;
 }
 
+// Image inside card layout
+
 .card-product img {
   height: 100%;
   width: 250px;
   object-fit: cover;
 }
 
+// Pilot homescreen card title
+
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
+
+// Card subtitle (No Trip/No Ticket Card)
 
 .card-product p {
   font-size: 12px;
@@ -30,17 +37,21 @@
   margin-top: 8px;
 }
 
+// Padding for the content inside the card (Title and subtitle)
+
 .card-product-infos {
   padding-left: 20px;
   padding: 16px;
 }
 
-// Ticket info & buy ticket screen
+// Title above "Your Trip Info" card
 
 .title-ticket {
   color: #ffffff;
   padding-bottom: 5px;
 }
+
+// "Your Trip Info" - Buy Ticket card layout
 
 #class-selection-card {
   padding: 25px;
@@ -51,6 +62,7 @@
   // background-color: rgb(187, 187, 187);
 }
 
+// Selector for classes (First Class etc.)
 
 .select.optional {
   color: black;
@@ -58,9 +70,13 @@
   white-space: nowrap;
 }
 
+// (Buy Ticket Card) Margin between the class selector and text above
+
 #info-end {
   margin-bottom: 30px;
 }
+
+// Class selector with measurements
 
 #ticket_class_option {
   width: 100%;
@@ -68,10 +84,14 @@
   margin: 0;
 }
 
+// Button Layout (Align and display)
+
 .selection-button {
   display: inline-block;
   align-items: center;
 }
+
+// Buy Button on Buy Ticket card
 
 #buy-button {
   color: #ffffff;
@@ -80,12 +100,15 @@
   padding: 6px;
 }
 
-//
+// Text setup for titles in cards (font and color)
+
 .card-product .card-product-infos h2 {
   font-family: 'Fredoka One';
   font-size: 20px;
   color: #00C2EA;
 }
+
+// Pilot screen card call-to-action button with hover
 
 .btn-space {
     background-color: #00C2EA;
@@ -103,11 +126,32 @@
     }
 }
 
+// Text color options for "p", regular and strong
+
 .text-color-p {
   color: #00C2EA;
   margin-left: 50px;
 }
 
 .text-color-p strong {
+  color: black;
+}
+
+// No Tickets Card Title
+
+.no-ticket {
+  color: #03C2EA;
+  font-size: 27px;
+}
+
+// No Trips Card Title
+
+.no-trip {
+  color: #03C2EA;
+  font-size: 26px;
+}
+
+// Subtitle above the buttons on the No trips card
+.above-button {
   color: black;
 }

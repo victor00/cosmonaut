@@ -27,7 +27,8 @@
                     <%= image_tag "no-tickets-show" %>
                     <div class="card-product-infos p-5 ">
                         <% if current_user.tickets.empty? %>   
-                            <p class="pl-5">No Tickets Yet</p>
+                            <h3 class="no-ticket pl-5">You don't have any tickets yet</h3> 
+                            <p class="pl-5 mt-5">You can browse and buy tickets clicking the button below:</p>
                             <%= link_to "Get A Ticket Now", root_path, class: "btn btn-primary mt-5 ml-5"  %>
                         <% end %>
                     </div>  
@@ -35,3 +36,5 @@
         <% end %>
     </div>
 <% end %>
+
+<%= audio_tag "starman.mp3", id: "starman" %>
